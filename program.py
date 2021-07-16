@@ -49,7 +49,9 @@ while condition:
         askRestart = input("Calculation finished. Exit program? (y/n): ")
         if askRestart == "y":
             condition = False
-        elif askRestart != "y" or "n":
+        elif askRestart == "n":
+            print("Restarting program.")
+        else:
             print("Unknown input. Restarting program.")
 
 
