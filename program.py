@@ -5,28 +5,28 @@ class Calculator:
         self.first_value = first_value
         self.second_value = second_value
         self.operator = operator
-
+    
     def add(self):
-        return "The result is %.3f" % (self.first_value + self.second_value)
+        print("The result is %.3f" % (self.first_value + self.second_value))
     
     def subtract(self):
-        return "The result is %.3f" % (self.first_value - self.second_value)
+        print("The result is %.3f" % (self.first_value - self.second_value))
     
     def multiply(self):
-        return "The result is %.3f" % (self.first_value * self.second_value)
+        print("The result is %.3f" % (self.first_value * self.second_value))
     
     def divide(self):
-        return "The result is %.3f" % (self.first_value / self.second_value)
+        print("The result is %.3f" % (self.first_value / self.second_value))
 
-    def askOperator(self):
+    def calculate(self):
         if self.operator == "*":
-            print(Calculator.multiply(self))
+            Calculator.multiply(self)
         elif self.operator == "+":
-            print(Calculator.add(self)) 
+            Calculator.add(self) 
         elif self.operator == "-":
-            print(Calculator.subtract(self)) 
+            Calculator.subtract(self)
         elif self.operator == "/":
-            print(Calculator.divide(self))
+            Calculator.divide(self)
         else:
             print("Invalid operator")
             return "Invalid"
@@ -35,26 +35,44 @@ condition = True
 
 while condition:
 
-    first_val = float(input("Enter the first value: "))
+    while True:
+        try:
+            first_val = float(input("Enter the first value: "))
+        except ValueError:
+            print("Invalid input. Try again.")
+            continue
+        else:
+            break
+
     Operator = input("Enter operator (*,+,-,/): ")
-    second_val = float(input("Enter the second value: "))
+
+    while True: 
+        try:
+            second_val = float(input("Enter the second value: "))
+        except ValueError:
+            print("Invalid input. Try again.")
+            continue
+        else:
+            break
 
     print("Calculating...")
 
     Calculation = Calculator(first_val, second_val, Operator)
-
-    if Calculation.askOperator() == "Invalid":
+    traceback = Calculation.calculate()
+    
+    if traceback == "Invalid":
         print("Restarting program.")
-    elif Calculation.askOperator != "Invalid":
+        continue
+    elif traceback != "Invalid":
         askRestart = input("Calculation finished. Exit program? (y/n): ")
         if askRestart == "y":
             condition = False
         elif askRestart == "n":
             print("Restarting program.")
+            continue
         else:
             print("Unknown input. Restarting program.")
-
-
+            continue
 
 
 
